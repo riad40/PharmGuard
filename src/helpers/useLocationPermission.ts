@@ -1,4 +1,4 @@
-import { Alert, PermissionsAndroid } from "react-native"
+import { PermissionsAndroid } from "react-native"
 
 const useLocationPermission = async () => {
     try {
@@ -14,11 +14,13 @@ const useLocationPermission = async () => {
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             console.log("Location permission granted")
+            return true
         } else {
             console.log("Location permission denied")
+            return false
         }
     } catch (err) {
-        console.warn(err)
+        console.error(err)
     }
 }
 

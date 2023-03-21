@@ -2,13 +2,41 @@ import { Text, StyleSheet, View, TouchableOpacity, Image } from "react-native"
 import appContainer from "../assets/styles/appContainer"
 import { NavigationProp } from "@react-navigation/native"
 import useLocationPermission from "../helpers/useLocationPermission"
+import Geolocation from "react-native-geolocation-service"
+import { useDispatch } from "react-redux"
 interface Props {
     navigation: NavigationProp<any>
 }
 
 const GetStarted = ({ navigation }: Props): JSX.Element => {
+    const dispatch = useDispatch()
+
     const handlePress = () => {
-        useLocationPermission()
+        const granted = useLocationPermission()
+
+        granted.then((granted) => {
+            if (granted) {
+                console.log("granted", granted)
+
+                Geolocation.getCurrentPosition(
+                    (position) => {
+                        dispatch({
+                            type: "SET_LOCATION",
+                            payload: position,
+                        })
+                    },
+                    (error) => {
+                        console.log(error)
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 15000,
+                        maximumAge: 10000,
+                    }
+                )
+            }
+        })
+
         navigation.navigate("Home")
     }
 
