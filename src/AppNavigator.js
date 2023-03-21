@@ -30,7 +30,7 @@ const AppNavigator = () => {
                             />
                         )
                     },
-                    tabBarActiveTintColor: "#41CD7D",
+                    tabBarActiveTintColor: "#45a6f0",
                     tabBarInactiveTintColor: "#524A4E",
                     headerShown: false,
                     tabBarStyle: {
@@ -43,8 +43,8 @@ const AppNavigator = () => {
                         elevation: 0,
                         shadowOpacity: 0,
                         borderWidth: 2,
-                        borderColor: "#41CD7D",
-                        borderTopColor: "#41CD7D",
+                        borderColor: "#45a6f0",
+                        borderTopColor: "#45a6f0",
                         borderTopWidth: 2,
                         display: route.name === "GetStarted" ? "none" : "flex",
                     },

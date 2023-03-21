@@ -1,12 +1,17 @@
 import { Text, StyleSheet, View, TouchableOpacity, Image } from "react-native"
 import appContainer from "../assets/styles/appContainer"
 import { NavigationProp } from "@react-navigation/native"
-
+import useLocationPermission from "../helpers/useLocationPermission"
 interface Props {
     navigation: NavigationProp<any>
 }
 
 const GetStarted = ({ navigation }: Props): JSX.Element => {
+    const handlePress = () => {
+        useLocationPermission()
+        navigation.navigate("Home")
+    }
+
     return (
         <View style={appContainer.container}>
             <View style={styles.wrapper}>
@@ -26,7 +31,7 @@ const GetStarted = ({ navigation }: Props): JSX.Element => {
 
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate("Home")}
+                        onPress={handlePress}
                         style={styles.button}
                     >
                         <Text style={styles.buttonText}>Get Started</Text>
