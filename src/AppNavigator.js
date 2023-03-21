@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
 import Ionicons from "react-native-vector-icons/Ionicons"
 
-import { Home, Favorites, PharmacyDetails, Map } from "./screens"
+import { Home, Favorites, PharmacyDetails, Map, GetStarted } from "./screens"
 
 const Tab = createBottomTabNavigator()
 
@@ -17,7 +17,7 @@ const AppNavigator = () => {
                         if (route.name === "Home") {
                             iconName = focused ? "home" : "home-outline"
                         } else if (route.name === "Map") {
-                            iconName = focused ? "map" : "map-outline"
+                            iconName = focused ? "location" : "location-outline"
                         } else if (route.name === "Favorites") {
                             iconName = focused ? "heart" : "heart-outline"
                         }
@@ -46,14 +46,23 @@ const AppNavigator = () => {
                         borderColor: "#41CD7D",
                         borderTopColor: "#41CD7D",
                         borderTopWidth: 2,
+                        display: route.name === "GetStarted" ? "none" : "flex",
                     },
                     tabBarLabelStyle: {
                         fontSize: 15,
                         marginBottom: 4,
                         fontWeight: "bold",
                     },
+                    initialRouteName: "GetStarted",
                 })}
             >
+                <Tab.Screen
+                    name="GetStarted"
+                    component={GetStarted}
+                    options={{
+                        tabBarButton: (props) => null,
+                    }}
+                />
                 <Tab.Screen name="Home" component={Home} />
                 <Tab.Screen name="Map" component={Map} />
                 <Tab.Screen name="Favorites" component={Favorites} />
