@@ -1,10 +1,11 @@
 import { Text, StyleSheet, View } from "react-native"
 import appContainer from "../assets/styles/appContainer"
+import { Header } from "../components"
 
 const Home = (): JSX.Element => {
     return (
         <View style={appContainer.container}>
-            <Text> Home Screen </Text>
+            <Header />
         </View>
     )
 }
