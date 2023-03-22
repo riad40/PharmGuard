@@ -18,3 +18,30 @@ type Coordinates = {
 }
 
 export type rootState = ReturnType<typeof rootReducer>
+
+export type Pharmacy = {
+    id: number
+    name: string
+    address: string
+    longitude: number
+    latitude: number
+    distance: number
+    images: string[]
+    stratHours: string
+    endHours: string
+    phone: string
+    email: string
+    services: string[]
+    onGuard: boolean
+    onGuardDays: string[]
+    reviews: Review[]
+}
+
+export type Review = {
+    id: number
+    pharmacyId: number
+    userId: number
+    rating: number
+    comment: string
+    date: string
+}

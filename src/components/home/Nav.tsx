@@ -1,30 +1,54 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { Pharmacy } from "../../@types"
+import data from "../../helpers/data"
 
 const Nav = (): JSX.Element => {
-    const [active, setActive] = useState<string>("pharmacies")
+    const [active, setActive] = useState<string>("GET_PHARMACIES")
+
+    const dispatch = useDispatch()
 
     const handlePress = (type: string) => {
         setActive(type)
     }
+
+    const savePharmacies = () => {
+        let pharmacies: Pharmacy[] = []
+
+        if (active === "GET_PHARMACIES") {
+            pharmacies = data
+        } else if (active === "GET_ON_GUARD_PHARMACIES") {
+            pharmacies = data.filter((pharmacy) => pharmacy.onGuard)
+        }
+
+        dispatch({
+            type: "SAVE_PHARMACIES",
+            payload: pharmacies,
+        })
+    }
+
+    useEffect(() => {
+        savePharmacies()
+    }, [active])
 
     return (
         <View style={styles.container}>
             <TouchableOpacity
                 style={[
                     styles.button,
-                    active === "pharmacies" && styles.active,
+                    active === "GET_PHARMACIES" && styles.active,
                 ]}
-                onPress={() => handlePress("pharmacies")}
+                onPress={() => handlePress("GET_PHARMACIES")}
             >
                 <Text style={styles.text}>All Pharmacies</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={[
                     styles.button,
-                    active === "pharmaciesOnGuard" && styles.active,
+                    active === "GET_ON_GUARD_PHARMACIES" && styles.active,
                 ]}
-                onPress={() => handlePress("pharmaciesOnGuard")}
+                onPress={() => handlePress("GET_ON_GUARD_PHARMACIES")}
             >
                 <Text style={styles.text}>Pharmacies on guard</Text>
             </TouchableOpacity>
