@@ -1,3 +1,4 @@
-import Header from "./Header"
+import Header from "./home/Header"
+import Nav from "./home/Nav"
 
-export { Header }
+export { Header, Nav }

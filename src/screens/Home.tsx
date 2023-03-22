@@ -1,11 +1,12 @@
 import { Text, StyleSheet, View } from "react-native"
 import appContainer from "../assets/styles/appContainer"
-import { Header } from "../components"
+import { Header, Nav } from "../components"
 
 const Home = (): JSX.Element => {
     return (
         <View style={appContainer.container}>
             <Header />
+            <Nav />
         </View>
     )
 }

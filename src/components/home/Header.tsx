@@ -8,7 +8,7 @@ const Header = (): JSX.Element => {
                 <TouchableOpacity>
                     <Image
                         style={styles.logo}
-                        source={require("../assets/imgs/logo.png")}
+                        source={require("../../assets/imgs/logo.png")}
                     />
                 </TouchableOpacity>
                 <Text style={styles.title}>PharmGuard</Text>
