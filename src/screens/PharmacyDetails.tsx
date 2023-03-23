@@ -1,6 +1,10 @@
-import { Text, View, StyleSheet, Image } from "react-native"
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native"
 import { NavigationProp } from "@react-navigation/native"
 import appContainer from "../assets/styles/appContainer"
+import Iocicons from "react-native-vector-icons/Ionicons"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useState } from "react"
+import { Pharmacy } from "../@types"
 interface Props {
     route: any
     navigation: NavigationProp<any>
@@ -9,8 +13,56 @@ interface Props {
 const PharmacyDetails = ({ route, navigation }: Props): JSX.Element => {
     const { pharmacy } = route.params
 
+    const [isFavorite, setIsFavorite] = useState<boolean>(false)
+    const [favorites, setFavorites] = useState<Pharmacy[]>([])
+
+    const handlePress = async (pharmacy: Pharmacy) => {
+        await addToFavorites(pharmacy)
+    }
+
+    // add the pharmacy to the favorite list
+    const addToFavorites = async (pharmacy: Pharmacy) => {
+        try {
+            // get old data from the async storage
+            const jsonValue = await AsyncStorage.getItem("favorites")
+            const oldData = jsonValue != null ? JSON.parse(jsonValue) : []
+            // add the new pharmacy to the old data
+            const newData = [...oldData, pharmacy]
+            // save the new data to the async storage
+            await AsyncStorage.setItem("favorites", JSON.stringify(newData))
+            setFavorites(newData)
+            setIsFavorite(true)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <View style={appContainer.container}>
+            <View style={styles.header}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Iocicons
+                        name="chevron-back-outline"
+                        size={24}
+                        color="#000"
+                    />
+                </TouchableOpacity>
+                <Text style={styles.title}>Pharmacy Details</Text>
+                <TouchableOpacity onPress={() => handlePress(pharmacy)}>
+                    {
+                        // Check if the pharmacy is already in the favorite list
+                        isFavorite ? (
+                            <Iocicons name="heart" size={24} color="#000" />
+                        ) : (
+                            <Iocicons
+                                name="heart-outline"
+                                size={24}
+                                color="#000"
+                            />
+                        )
+                    }
+                </TouchableOpacity>
+            </View>
             <View style={styles.container}>
                 <Image
                     source={{ uri: pharmacy.images[0] }}
@@ -83,6 +135,19 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#666",
         marginRight: 10,
+    },
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: 10,
+        backgroundColor: "#fff",
+        borderRadius: 10,
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#000",
     },
 })
 
