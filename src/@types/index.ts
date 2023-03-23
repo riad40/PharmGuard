@@ -27,13 +27,13 @@ export type Pharmacy = {
     latitude: number
     distance: number
     images: string[]
-    stratHours: string
-    endHours: string
+    openingHours: string
+    closingHours: string
     phone: string
     email: string
     services: string[]
     onGuard: boolean
-    onGuardDays: string[]
+    onGuardDays: [Date, Date] | null
     reviews: Review[]
 }
 
