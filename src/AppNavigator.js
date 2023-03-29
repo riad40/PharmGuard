@@ -1,12 +1,26 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
 import Ionicons from "react-native-vector-icons/Ionicons"
+import { useState, useEffect } from "react"
 
 import { Home, Favorites, PharmacyDetails, Map, GetStarted } from "./screens"
-
+import AsyncStorage from "@react-native-async-storage/async-storage"
 const Tab = createBottomTabNavigator()
 
 const AppNavigator = () => {
+    const [isFirstLaunch, setIsFirstLaunch] = useState(false)
+
+    useEffect(() => {
+        AsyncStorage.getItem("firstLaunch").then((value) => {
+            if (value === null) {
+                AsyncStorage.setItem("firstLaunch", "true")
+                setIsFirstLaunch(true)
+            } else {
+                setIsFirstLaunch(false)
+            }
+        })
+    }, [])
+
     return (
         <NavigationContainer>
             <Tab.Navigator
@@ -53,26 +67,47 @@ const AppNavigator = () => {
                         marginBottom: 4,
                         fontWeight: "bold",
                     },
-                    initialRouteName: "GetStarted",
+                    tabBarShowLabel: false,
+                    tabBarHideOnKeyboard: true,
+                    tabBarAllowFontScaling: true,
+                    tabBarPressColor: "#45a6f0",
+                    tabBarPressOpacity: 0.8,
                 })}
             >
-                <Tab.Screen
-                    name="GetStarted"
-                    component={GetStarted}
-                    options={{
-                        tabBarButton: (props) => null,
-                    }}
-                />
-                <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Map" component={Map} />
-                <Tab.Screen name="Favorites" component={Favorites} />
-                <Tab.Screen
-                    name="PharmacyDetails"
-                    component={PharmacyDetails}
-                    options={{
-                        tabBarButton: (props) => null,
-                    }}
-                />
+                {isFirstLaunch ? (
+                    <>
+                        <Tab.Screen
+                            name="GetStarted"
+                            component={GetStarted}
+                            options={{
+                                tabBarButton: (props) => null,
+                            }}
+                        />
+                        <Tab.Screen name="Home" component={Home} />
+                        <Tab.Screen name="Map" component={Map} />
+                        <Tab.Screen name="Favorites" component={Favorites} />
+                        <Tab.Screen
+                            name="PharmacyDetails"
+                            component={PharmacyDetails}
+                            options={{
+                                tabBarButton: (props) => null,
+                            }}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <Tab.Screen name="Home" component={Home} />
+                        <Tab.Screen name="Map" component={Map} />
+                        <Tab.Screen name="Favorites" component={Favorites} />
+                        <Tab.Screen
+                            name="PharmacyDetails"
+                            component={PharmacyDetails}
+                            options={{
+                                tabBarButton: (props) => null,
+                            }}
+                        />
+                    </>
+                )}
             </Tab.Navigator>
         </NavigationContainer>
     )
