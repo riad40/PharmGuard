@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { useState, useEffect } from "react"
+import { MAIN_COLOR } from "./constants"
 
 import { Home, Favorites, PharmacyDetails, Map, GetStarted } from "./screens"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -44,22 +45,14 @@ const AppNavigator = () => {
                             />
                         )
                     },
-                    tabBarActiveTintColor: "#45a6f0",
+                    tabBarActiveTintColor: MAIN_COLOR,
                     tabBarInactiveTintColor: "#524A4E",
                     headerShown: false,
                     tabBarStyle: {
                         backgroundColor: "#fff",
-                        position: "absolute",
-                        bottom: 40,
                         marginHorizontal: 20,
                         height: 60,
-                        borderRadius: 20,
                         elevation: 0,
-                        shadowOpacity: 0,
-                        borderWidth: 2,
-                        borderColor: "#45a6f0",
-                        borderTopColor: "#45a6f0",
-                        borderTopWidth: 2,
                         display: route.name === "GetStarted" ? "none" : "flex",
                     },
                     tabBarLabelStyle: {
@@ -67,7 +60,6 @@ const AppNavigator = () => {
                         marginBottom: 4,
                         fontWeight: "bold",
                     },
-                    tabBarShowLabel: false,
                     tabBarHideOnKeyboard: true,
                     tabBarAllowFontScaling: true,
                     tabBarPressColor: "#45a6f0",
