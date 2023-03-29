@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Pharmacy } from "../../@types"
 import data from "../../helpers/data"
+import { MAIN_COLOR } from "../../constants"
 
 const Nav = (): JSX.Element => {
     const [active, setActive] = useState<string>("GET_PHARMACIES")
@@ -50,7 +51,7 @@ const Nav = (): JSX.Element => {
                 ]}
                 onPress={() => handlePress("GET_ON_GUARD_PHARMACIES")}
             >
-                <Text style={styles.text}>Pharmacies on guard</Text>
+                <Text style={styles.text}>Pharmacies On Guard</Text>
             </TouchableOpacity>
         </View>
     )
@@ -75,10 +76,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: "40%",
         marginHorizontal: 5,
-        borderColor: "#000",
+        borderColor: MAIN_COLOR,
     },
     active: {
-        backgroundColor: "green",
+        backgroundColor: MAIN_COLOR,
     },
 })
 

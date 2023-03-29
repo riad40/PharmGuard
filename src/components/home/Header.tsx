@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
 import Ionicons from "react-native-vector-icons/Ionicons"
+import { MAIN_COLOR } from "../../constants"
 
 const Header = (): JSX.Element => {
     return (
@@ -15,7 +16,7 @@ const Header = (): JSX.Element => {
             </View>
             <View style={styles.right}>
                 <TouchableOpacity>
-                    <Ionicons name="search" size={30} color="green" />
+                    <Ionicons name="search" size={30} color="#45a6f0" />
                 </TouchableOpacity>
             </View>
         </View>

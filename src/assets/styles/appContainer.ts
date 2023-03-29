@@ -4,8 +4,9 @@ const appContainer = StyleSheet.create({
     container: {
         width: "100%",
         height: "100%",
-        backgroundColor: "#F4F4F4",
+        backgroundColor: "#e5e5e5",
         padding: 20,
+        paddingBottom: 0,
     },
 })
 

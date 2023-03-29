@@ -1,7 +1,8 @@
-import { Image, Text, View, TouchableOpacity, StyleSheet } from "react-native"
+import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { NavigationProp } from "@react-navigation/native"
 import { Pharmacy } from "../../@types"
+import StarsRating from "./StarsRating"
 
 interface Props {
     pharmacy: Pharmacy
@@ -9,7 +10,10 @@ interface Props {
 }
 
 const PharmacyCard = ({ pharmacy, navigation }: Props) => {
-    const { name, address, distance, images } = pharmacy
+    const { name, address, reviews, images } = pharmacy
+
+    // get only rating inside the reviews array
+    const ratings = reviews.map((review) => review.rating)
 
     return (
         <TouchableOpacity
@@ -17,12 +21,31 @@ const PharmacyCard = ({ pharmacy, navigation }: Props) => {
             onPress={() => navigation.navigate("PharmacyDetails", { pharmacy })}
         >
             <Image source={{ uri: images[0] }} style={styles.logo} />
+
             <View style={styles.infoContainer}>
                 <Text style={styles.name}>{name}</Text>
-                <Text style={styles.address}>{address}</Text>
-                <Text style={styles.distance}>{distance} km</Text>
+                <View style={styles.infoChild}>
+                    <Ionicons name="location-outline" size={20} color="#000" />
+                    <Text
+                        style={[
+                            styles.text,
+                            {
+                                width: "90%",
+                            },
+                        ]}
+                    >
+                        {address}
+                    </Text>
+                </View>
+                <View style={styles.infoChild}>
+                    {ratings.map((rating, index) => (
+                        <View key={index}>
+                            <StarsRating rating={rating} />
+                        </View>
+                    ))}
+                </View>
             </View>
-            <Ionicons name="chevron-forward-outline" size={24} color="#000" />
+            <Ionicons name="chevron-forward-outline" size={30} color="#000" />
         </TouchableOpacity>
     )
 }
@@ -32,14 +55,15 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: "#ccc",
         marginVertical: 5,
+        backgroundColor: "#fff",
+        borderRadius: 5,
+        elevation: 5,
     },
     logo: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 100,
+        height: 100,
+        borderRadius: 10,
         marginRight: 10,
     },
     infoContainer: {
@@ -48,14 +72,19 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 16,
         fontWeight: "bold",
+        color: "#000",
+        marginLeft: 5,
+        marginVertical: 5,
     },
-    address: {
+    text: {
         fontSize: 14,
-        color: "#666",
+        color: "#000",
+        marginLeft: 5,
     },
-    distance: {
-        fontSize: 14,
-        color: "#666",
+    infoChild: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginVertical: 2,
     },
 })
 
