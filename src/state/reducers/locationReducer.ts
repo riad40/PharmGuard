@@ -1,9 +1,7 @@
 import { LocationObject } from "../../@types"
+import { saveLocation } from "../actions"
 
-type LocationAction = {
-    type: "SET_LOCATION"
-    payload: LocationObject
-}
+type LocationAction = ReturnType<typeof saveLocation>
 
 const initialState: LocationObject = {} as LocationObject
 

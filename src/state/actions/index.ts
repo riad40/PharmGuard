@@ -14,4 +14,11 @@ const savePharmacies = (pharmacies: Pharmacy[]) => {
     }
 }
 
-export { saveLocation }
+const searchPharmacies = (search: string) => {
+    return {
+        type: "SEARCH_PHARMACIES",
+        payload: search,
+    }
+}
+
+export { saveLocation, savePharmacies, searchPharmacies }

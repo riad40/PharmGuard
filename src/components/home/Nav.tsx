@@ -1,4 +1,11 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    TextInput,
+    Dimensions,
+} from "react-native"
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Pharmacy } from "../../@types"
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
     container: {
         width: "100%",
         flexDirection: "row",
-        marginVertical: 20,
+        marginVertical: 10,
         justifyContent: "center",
     },
     text: {
