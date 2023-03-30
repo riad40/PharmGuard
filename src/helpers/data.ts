@@ -3,10 +3,10 @@ import { Pharmacy } from "../@types"
 const data: Pharmacy[] = [
     {
         id: 1,
-        name: "Pharmacie Smaali",
-        address: "63 Rue la participation, Casablanca",
-        latitude: 33.6021776,
-        longitude: -7.5796962,
+        name: "Pharmacie Du Souk",
+        address: "6FR6+2Q3, Youssoufia",
+        latitude: 32.24000969999999,
+        longitude: -8.5380824,
         distance: 210,
         images: [
             "https://placeimg.com/640/480/any",
@@ -15,7 +15,7 @@ const data: Pharmacy[] = [
         openingHours: "8:00 AM",
         closingHours: "8:00 PM",
         phone: "+212 522 22 22 22",
-        email: "contact.smaali@pharmacy.ma",
+        email: "contact.Souk@pharmacy.ma",
         services: ["Vaccination", "Delivery", "Home Visit", "Prescription"],
         onGuard: true,
         onGuardDays: [new Date("2020-12-01"), new Date("2020-12-31")],
@@ -23,7 +23,7 @@ const data: Pharmacy[] = [
             {
                 id: 1,
                 pharmacyId: 1,
-                userId: 1,
+                username: "Some username",
                 rating: 4.5,
                 comment: "Great pharmacy, I recommend it",
                 date: "2020-12-01",
@@ -32,10 +32,10 @@ const data: Pharmacy[] = [
     },
     {
         id: 2,
-        name: "Pharmacie La solidarité التضامن",
-        address: "JC39+344, Casablanca",
-        latitude: 33.6026381,
-        longitude: -7.5821814,
+        name: "Pharmacie moderne",
+        address: "6FR7+J4H, Youssoufia",
+        latitude: 32.2415572,
+        longitude: -8.5371446,
         distance: 0.3,
         images: [
             "https://placeimg.com/640/480/any",
@@ -52,7 +52,7 @@ const data: Pharmacy[] = [
             {
                 id: 1,
                 pharmacyId: 1,
-                userId: 1,
+                username: "User name",
                 rating: 2,
                 comment: "Great pharmacy, I recommend it",
                 date: "2020-12-01",
@@ -61,10 +61,10 @@ const data: Pharmacy[] = [
     },
     {
         id: 3,
-        name: "pharmacie Sourzac Roches noires",
-        address: "70 Rue Augustin Sourzac, Casablanca",
-        latitude: 33.59975849999999,
-        longitude: -7.5809605,
+        name: "صيدلية إبن سينا",
+        address: "6FQ5+X4W, Youssoufia",
+        latitude: 32.23999469999999,
+        longitude: -8.542164399999997,
         distance: 300,
         images: [
             "https://placeimg.com/640/480/any",
@@ -81,7 +81,7 @@ const data: Pharmacy[] = [
             {
                 id: 1,
                 pharmacyId: 1,
-                userId: 1,
+                username: "Another username",
                 rating: 3,
                 comment: "Great pharmacy, I recommend it",
                 date: "2020-12-01",
@@ -91,10 +91,10 @@ const data: Pharmacy[] = [
 
     {
         id: 4,
-        name: "Phramacie des Acacias",
-        address: "HCXC+XV4, Boulevard Batli Mohamed Ben Mekki, Casablanca",
-        latitude: 33.5998937,
-        longitude: -7.577812000000001,
+        name: "Pharmacie INAS",
+        address: "6FV5+3VP, Youssoufia",
+        latitude: 32.2427022,
+        longitude: -8.5402997,
         distance: 100,
         images: [
             "https://placeimg.com/640/480/any",
@@ -111,7 +111,7 @@ const data: Pharmacy[] = [
             {
                 id: 1,
                 pharmacyId: 1,
-                userId: 1,
+                username: "Just a username",
                 rating: 1,
                 comment: "Great pharmacy, I recommend it",
                 date: "2020-12-01",
@@ -120,10 +120,10 @@ const data: Pharmacy[] = [
     },
     {
         id: 5,
-        name: "Pharmacie Belaous Laïla",
-        address: "37 rue Al Bahalil 20290, Casablanca",
-        latitude: 33.598445,
-        longitude: -7.585731999999999,
+        name: "صيدلية احمر",
+        address: "6FR7+RP2, Youssoufia",
+        latitude: 32.2420163,
+        longitude: -8.535741800000002,
         distance: 150,
         images: [
             "https://placeimg.com/640/480/any",
@@ -140,7 +140,16 @@ const data: Pharmacy[] = [
             {
                 id: 1,
                 pharmacyId: 1,
-                userId: 1,
+                username: "Username Again",
+                rating: 2.2,
+                comment:
+                    "Great pharmacy, I recommend it jhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+                date: "2020-12-01",
+            },
+            {
+                id: 1,
+                pharmacyId: 1,
+                username: "Username Again",
                 rating: 2.2,
                 comment: "Great pharmacy, I recommend it",
                 date: "2020-12-01",
