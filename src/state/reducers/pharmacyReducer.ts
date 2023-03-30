@@ -16,7 +16,7 @@ const pharmacyReducer = (state = pharmacies, action: PharmacyAction) => {
             return state.filter((pharmacy) =>
                 pharmacy.name
                     .toLowerCase()
-                    .includes(action.payload.toLowerCase())
+                    .includes(action.payload.toLowerCase() as string)
             )
 
         default:
