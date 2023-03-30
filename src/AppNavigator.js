@@ -4,7 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 import { useState, useEffect } from "react"
 import { MAIN_COLOR } from "./constants"
 
-import { Home, Favorites, PharmacyDetails, Map, GetStarted } from "./screens"
+import { Home, PharmacyDetails, Map, GetStarted } from "./screens"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 const Tab = createBottomTabNavigator()
 
@@ -77,7 +77,6 @@ const AppNavigator = () => {
                         />
                         <Tab.Screen name="Home" component={Home} />
                         <Tab.Screen name="Map" component={Map} />
-                        <Tab.Screen name="Favorites" component={Favorites} />
                         <Tab.Screen
                             name="PharmacyDetails"
                             component={PharmacyDetails}
@@ -90,7 +89,6 @@ const AppNavigator = () => {
                     <>
                         <Tab.Screen name="Home" component={Home} />
                         <Tab.Screen name="Map" component={Map} />
-                        <Tab.Screen name="Favorites" component={Favorites} />
                         <Tab.Screen
                             name="PharmacyDetails"
                             component={PharmacyDetails}
