@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
 import Ionicons from "react-native-vector-icons/Ionicons"
-import { Pharmacy } from "../../@types"
+import { Pharmacy, rootState } from "../../@types"
+import calculateDistance from "../../helpers/calculateDistance"
+import { useSelector } from "react-redux"
 
 const ModalContent = ({
     pharmacy,
@@ -9,6 +11,17 @@ const ModalContent = ({
     pharmacy: Pharmacy
     toggleModal: () => void
 }): JSX.Element => {
+    const location = useSelector((state: rootState) => state.location)
+
+    const distance = calculateDistance(
+        location.coords.latitude,
+        location.coords.longitude,
+        pharmacy.latitude,
+        pharmacy.longitude
+    )
+
+    const distanceInKm = distance / 1000
+
     return (
         <View style={styles.modal}>
             <TouchableOpacity style={styles.modalClose} onPress={toggleModal}>
@@ -16,7 +29,9 @@ const ModalContent = ({
             </TouchableOpacity>
             <View style={styles.modalContent}>
                 <Text style={styles.modalTitle}>{pharmacy.name}</Text>
-                <Text style={styles.modalTitle}>{pharmacy.distance} m</Text>
+                <Text style={styles.modalTitle}>
+                    {distanceInKm.toFixed(2)} km
+                </Text>
             </View>
             <Text style={styles.content}>{pharmacy.address}</Text>
             <View style={styles.bottomContent}>

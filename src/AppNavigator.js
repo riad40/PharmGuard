@@ -1,20 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
 import Ionicons from "react-native-vector-icons/Ionicons"
-import { useState, useEffect } from "react"
 import { MAIN_COLOR } from "./constants"
 
 import { Home, PharmacyDetails, Map, GetStarted } from "./screens"
-import AsyncStorage from "@react-native-async-storage/async-storage"
 const Tab = createBottomTabNavigator()
 
 const AppNavigator = () => {
-    const [isFirstLaunch, setIsFirstLaunch] = useState(false)
-
-    useEffect(() => {
-        AsyncStorage.clear()
-    }, [])
-
     return (
         <NavigationContainer>
             <Tab.Navigator
@@ -59,8 +51,6 @@ const AppNavigator = () => {
                     tabBarPressOpacity: 0.8,
                 })}
             >
-                {/* {isFirstLaunch ? ( */}
-                {/* <> */}
                 <Tab.Screen
                     name="GetStarted"
                     component={GetStarted}
@@ -77,20 +67,6 @@ const AppNavigator = () => {
                         tabBarButton: (props) => null,
                     }}
                 />
-                {/* </> */}
-                {/* ) : ( */}
-                {/* <>
-                        <Tab.Screen name="Home" component={Home} />
-                        <Tab.Screen name="Map" component={Map} />
-                        <Tab.Screen
-                            name="PharmacyDetails"
-                            component={PharmacyDetails}
-                            options={{
-                                tabBarButton: (props) => null,
-                            }}
-                        />
-                    </> */}
-                {/* )} */}
             </Tab.Navigator>
         </NavigationContainer>
     )

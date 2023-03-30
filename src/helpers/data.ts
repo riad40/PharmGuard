@@ -9,8 +9,7 @@ const data: Pharmacy[] = [
         longitude: -8.5380824,
         distance: 210,
         images: [
-            "https://placeimg.com/640/480/any",
-            "https://placeimg.com/640/480/any",
+            "https://www.uiass.ma/wp-content/uploads/2018/01/PHARMACIE2-2.jpg",
         ],
         openingHours: "8:00 AM",
         closingHours: "8:00 PM",
@@ -38,9 +37,9 @@ const data: Pharmacy[] = [
         longitude: -8.5371446,
         distance: 0.3,
         images: [
-            "https://placeimg.com/640/480/any",
-            "https://placeimg.com/640/480/any",
+            "https://www.pod.fr/wp-content/uploads/2020/05/dans-quelle-ville-acheter-sa-pharmacie-1.jpg",
         ],
+
         openingHours: "8:00 AM",
         closingHours: "8:00 PM",
         phone: "+212 522 22 22 22",
@@ -67,8 +66,7 @@ const data: Pharmacy[] = [
         longitude: -8.542164399999997,
         distance: 300,
         images: [
-            "https://placeimg.com/640/480/any",
-            "https://placeimg.com/640/480/any",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/%C3%89griselles-le-Bocage-FR-89-commerce-pharmacie-1.jpg/1200px-%C3%89griselles-le-Bocage-FR-89-commerce-pharmacie-1.jpg",
         ],
         openingHours: "8:00 AM",
         closingHours: "8:00 PM",
@@ -97,8 +95,7 @@ const data: Pharmacy[] = [
         longitude: -8.5402997,
         distance: 100,
         images: [
-            "https://placeimg.com/640/480/any",
-            "https://placeimg.com/640/480/any",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyWWtvH5hHuN7jsJMs8g2OtOdoPAmn5sqwkA&usqp=CAU",
         ],
         openingHours: "8:00 AM",
         closingHours: "8:00 PM",
@@ -126,8 +123,7 @@ const data: Pharmacy[] = [
         longitude: -8.535741800000002,
         distance: 150,
         images: [
-            "https://placeimg.com/640/480/any",
-            "https://placeimg.com/640/480/any",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Paris_75009_Place_Blanche_no_05_Grande_Pharmacie_de_la_Place_Blanche.jpg/1200px-Paris_75009_Place_Blanche_no_05_Grande_Pharmacie_de_la_Place_Blanche.jpg",
         ],
         openingHours: "8:00 AM",
         closingHours: "8:00 PM",
@@ -142,8 +138,7 @@ const data: Pharmacy[] = [
                 pharmacyId: 1,
                 username: "Username Again",
                 rating: 2.2,
-                comment:
-                    "Great pharmacy, I recommend it jhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+                comment: "Great pharmacy, I recommend it",
                 date: "2020-12-01",
             },
             {
