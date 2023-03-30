@@ -3,6 +3,7 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 import { NavigationProp } from "@react-navigation/native"
 import { Pharmacy } from "../../@types"
 import StarsRating from "./StarsRating"
+import getAverageRating from "../../helpers/getAvreageRating"
 
 interface Props {
     pharmacy: Pharmacy
@@ -11,9 +12,6 @@ interface Props {
 
 const PharmacyCard = ({ pharmacy, navigation }: Props) => {
     const { name, address, reviews, images } = pharmacy
-
-    // get only rating inside the reviews array
-    const ratings = reviews.map((review) => review.rating)
 
     return (
         <TouchableOpacity
@@ -38,11 +36,7 @@ const PharmacyCard = ({ pharmacy, navigation }: Props) => {
                     </Text>
                 </View>
                 <View style={styles.infoChild}>
-                    {ratings.map((rating, index) => (
-                        <View key={index}>
-                            <StarsRating rating={rating} />
-                        </View>
-                    ))}
+                    <StarsRating rating={getAverageRating(reviews)} />
                 </View>
             </View>
             <Ionicons name="chevron-forward-outline" size={30} color="#000" />
