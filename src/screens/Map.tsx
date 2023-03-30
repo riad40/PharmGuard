@@ -5,7 +5,7 @@ import {
     TouchableOpacity,
     Modal,
 } from "react-native"
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
+import MapView, { Marker, PROVIDER_GOOGLE, Callout } from "react-native-maps"
 import { useSelector } from "react-redux"
 import { rootState, Pharmacy } from "../@types"
 import MapViewDirections from "react-native-maps-directions"
@@ -19,7 +19,9 @@ const Map = (): JSX.Element => {
 
     const { latitude, longitude } = location.coords
 
-    const pharmacies = useSelector((state: rootState) => state.pharmacies)
+    const pharmacies: any[] = useSelector(
+        (state: rootState) => state.pharmacies
+    )
 
     const [nearestPharmacy, setNearestPharmacy] = useState<Pharmacy>(
         {} as Pharmacy
@@ -76,8 +78,8 @@ const Map = (): JSX.Element => {
                                 latitude: pharmacy.latitude,
                                 longitude: pharmacy.longitude,
                             }}
-                            pinColor="green"
                             onPress={() => handlePharmacyPress(pharmacy)}
+                            pinColor="green"
                         />
                     ))}
                 {nearestPharmacy && (

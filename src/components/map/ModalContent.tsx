@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { Pharmacy } from "../../@types"
-
 interface ModalProps {
     pharmacy: Pharmacy
     toggleModal: () => void
@@ -13,24 +12,16 @@ const ModalContent = ({ pharmacy, toggleModal }: ModalProps): JSX.Element => {
             <TouchableOpacity style={styles.modalClose} onPress={toggleModal}>
                 <Ionicons name="chevron-down-outline" size={30} />
             </TouchableOpacity>
-            <View>
+            <View style={styles.modalContent}>
                 <Text style={styles.modalTitle}>{pharmacy.name}</Text>
-                <Image
-                    source={{ uri: pharmacy.images[0] }}
-                    style={{ width: "100%", height: 200 }}
-                />
-                <View style={styles.modalContent}>
-                    <Text style={styles.heading}> Address </Text>
-                    <Text style={styles.content}> {pharmacy.address} </Text>
-                </View>
-                <View style={styles.modalContent}>
-                    <Text style={styles.heading}> Opening Hours </Text>
-                    <Text style={styles.content}>{pharmacy.openingHours}</Text>
-                </View>
-                <View style={styles.modalContent}>
-                    <Text style={styles.heading}> Phone Number </Text>
-                    <Text style={styles.content}> {pharmacy.phone} </Text>
-                </View>
+                <Text style={styles.modalTitle}>{pharmacy.distance} m</Text>
+            </View>
+            <Text style={styles.content}>{pharmacy.address}</Text>
+            <View style={styles.bottomContent}>
+                <Ionicons name="time-outline" size={20} color="#000" />
+                <Text style={[styles.content, { marginLeft: 5 }]}>
+                    {pharmacy.openingHours}
+                </Text>
             </View>
         </View>
     )
@@ -40,12 +31,12 @@ const styles = StyleSheet.create({
     modal: {
         position: "absolute",
         bottom: 0,
-        backgroundColor: "white",
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        backgroundColor: "#e6e6e6",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         padding: 20,
         paddingTop: 5,
-        height: "70%",
+        height: "20%",
         width: "100%",
     },
     modalClose: {
@@ -55,8 +46,8 @@ const styles = StyleSheet.create({
     modalTitle: {
         fontSize: 20,
         fontWeight: "bold",
-        marginBottom: 20,
         textAlign: "center",
+        color: "#000",
     },
     modalContent: {
         flexDirection: "row",
@@ -66,9 +57,20 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 16,
         fontWeight: "bold",
+        color: "#000",
     },
     content: {
         fontSize: 16,
+        color: "#000",
+    },
+    bottomContent: {
+        fontSize: 16,
+        fontWeight: "bold",
+        position: "absolute",
+        bottom: 10,
+        left: 20,
+        flexDirection: "row",
+        alignItems: "center",
     },
 })
 
