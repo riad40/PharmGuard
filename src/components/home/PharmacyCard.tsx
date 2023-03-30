@@ -5,12 +5,13 @@ import { Pharmacy } from "../../@types"
 import StarsRating from "./StarsRating"
 import getAverageRating from "../../helpers/getAvreageRating"
 
-interface Props {
+const PharmacyCard = ({
+    pharmacy,
+    navigation,
+}: {
     pharmacy: Pharmacy
     navigation: NavigationProp<any>
-}
-
-const PharmacyCard = ({ pharmacy, navigation }: Props) => {
+}) => {
     const { name, address, reviews, images } = pharmacy
 
     return (

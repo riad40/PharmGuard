@@ -5,14 +5,12 @@ import { Pharmacy, rootState } from "../@types"
 import { NavigationProp } from "@react-navigation/native"
 import { useSelector } from "react-redux"
 
-interface Props {
+const Home = ({
+    navigation,
+}: {
     navigation: NavigationProp<any>
-}
-
-const Home = ({ navigation }: Props): JSX.Element => {
-    const data: any[] | any = useSelector(
-        (state: rootState) => state.pharmacies
-    )
+}): JSX.Element => {
+    const data: Pharmacy[] = useSelector((state: rootState) => state.pharmacies)
 
     return (
         <View style={appContainer.container}>

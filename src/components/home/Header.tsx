@@ -1,6 +1,4 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
-import Ionicons from "react-native-vector-icons/Ionicons"
-import { MAIN_COLOR } from "../../constants"
 
 const Header = (): JSX.Element => {
     return (

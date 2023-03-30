@@ -6,8 +6,6 @@ const StarsRating = ({ rating }: { rating: number }) => {
     const halfStars = Math.ceil(rating - fullStars)
     const emptyStars = 5 - fullStars - halfStars
 
-    // make render stars function
-
     const renderStars = (count: number, type: string) => {
         const stars = []
 

@@ -1,11 +1,4 @@
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet,
-    TextInput,
-    Dimensions,
-} from "react-native"
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Pharmacy } from "../../@types"

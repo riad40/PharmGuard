@@ -1,12 +1,14 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { Pharmacy } from "../../@types"
-interface ModalProps {
+
+const ModalContent = ({
+    pharmacy,
+    toggleModal,
+}: {
     pharmacy: Pharmacy
     toggleModal: () => void
-}
-
-const ModalContent = ({ pharmacy, toggleModal }: ModalProps): JSX.Element => {
+}): JSX.Element => {
     return (
         <View style={styles.modal}>
             <TouchableOpacity style={styles.modalClose} onPress={toggleModal}>

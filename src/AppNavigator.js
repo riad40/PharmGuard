@@ -12,14 +12,7 @@ const AppNavigator = () => {
     const [isFirstLaunch, setIsFirstLaunch] = useState(false)
 
     useEffect(() => {
-        AsyncStorage.getItem("firstLaunch").then((value) => {
-            if (value === null) {
-                AsyncStorage.setItem("firstLaunch", "true")
-                setIsFirstLaunch(true)
-            } else {
-                setIsFirstLaunch(false)
-            }
-        })
+        AsyncStorage.clear()
     }, [])
 
     return (
@@ -66,15 +59,27 @@ const AppNavigator = () => {
                     tabBarPressOpacity: 0.8,
                 })}
             >
-                {isFirstLaunch ? (
-                    <>
-                        <Tab.Screen
-                            name="GetStarted"
-                            component={GetStarted}
-                            options={{
-                                tabBarButton: (props) => null,
-                            }}
-                        />
+                {/* {isFirstLaunch ? ( */}
+                {/* <> */}
+                <Tab.Screen
+                    name="GetStarted"
+                    component={GetStarted}
+                    options={{
+                        tabBarButton: (props) => null,
+                    }}
+                />
+                <Tab.Screen name="Home" component={Home} />
+                <Tab.Screen name="Map" component={Map} />
+                <Tab.Screen
+                    name="PharmacyDetails"
+                    component={PharmacyDetails}
+                    options={{
+                        tabBarButton: (props) => null,
+                    }}
+                />
+                {/* </> */}
+                {/* ) : ( */}
+                {/* <>
                         <Tab.Screen name="Home" component={Home} />
                         <Tab.Screen name="Map" component={Map} />
                         <Tab.Screen
@@ -84,20 +89,8 @@ const AppNavigator = () => {
                                 tabBarButton: (props) => null,
                             }}
                         />
-                    </>
-                ) : (
-                    <>
-                        <Tab.Screen name="Home" component={Home} />
-                        <Tab.Screen name="Map" component={Map} />
-                        <Tab.Screen
-                            name="PharmacyDetails"
-                            component={PharmacyDetails}
-                            options={{
-                                tabBarButton: (props) => null,
-                            }}
-                        />
-                    </>
-                )}
+                    </> */}
+                {/* )} */}
             </Tab.Navigator>
         </NavigationContainer>
     )

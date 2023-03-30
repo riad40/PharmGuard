@@ -4,11 +4,12 @@ import { NavigationProp } from "@react-navigation/native"
 import useLocationPermission from "../helpers/useLocationPermission"
 import Geolocation from "react-native-geolocation-service"
 import { useDispatch } from "react-redux"
-interface Props {
-    navigation: NavigationProp<any>
-}
 
-const GetStarted = ({ navigation }: Props): JSX.Element => {
+const GetStarted = ({
+    navigation,
+}: {
+    navigation: NavigationProp<any>
+}): JSX.Element => {
     const dispatch = useDispatch()
 
     const handlePress = () => {

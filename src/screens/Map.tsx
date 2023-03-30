@@ -1,11 +1,5 @@
-import {
-    Text,
-    SafeAreaView,
-    StyleSheet,
-    TouchableOpacity,
-    Modal,
-} from "react-native"
-import MapView, { Marker, PROVIDER_GOOGLE, Callout } from "react-native-maps"
+import { SafeAreaView, StyleSheet, Modal } from "react-native"
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 import { useSelector } from "react-redux"
 import { rootState, Pharmacy } from "../@types"
 import MapViewDirections from "react-native-maps-directions"
@@ -19,7 +13,7 @@ const Map = (): JSX.Element => {
 
     const { latitude, longitude } = location.coords
 
-    const pharmacies: any[] = useSelector(
+    const pharmacies: Pharmacy[] = useSelector(
         (state: rootState) => state.pharmacies
     )
 
@@ -42,7 +36,6 @@ const Map = (): JSX.Element => {
     })
 
     const handlePharmacyPress = (pharmacy: Pharmacy) => {
-        // show the direction to the clocked pharmacy on the map
         setNearestPharmacy(pharmacy)
         setToggleModale(true)
     }
@@ -71,7 +64,7 @@ const Map = (): JSX.Element => {
                 />
 
                 {pharmacies &&
-                    pharmacies.map((pharmacy: any) => (
+                    pharmacies.map((pharmacy: Pharmacy) => (
                         <Marker
                             key={pharmacy.id}
                             coordinate={{

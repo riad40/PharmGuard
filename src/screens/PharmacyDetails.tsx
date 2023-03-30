@@ -6,18 +6,22 @@ import {
     FlatList,
     ScrollView,
 } from "react-native"
-import { NavigationProp } from "@react-navigation/native"
 import appContainer from "../assets/styles/appContainer"
 import Iocicons from "react-native-vector-icons/Ionicons"
 import { MAIN_COLOR } from "../constants"
 import StarsRating from "../components/home/StarsRating"
 import getAverageRating from "../helpers/getAvreageRating"
-interface Props {
-    route: any
-    navigation: NavigationProp<any>
-}
+import { Pharmacy } from "../@types"
 
-const PharmacyDetails = ({ route }: Props): JSX.Element => {
+const PharmacyDetails = ({
+    route,
+}: {
+    route: {
+        params: {
+            pharmacy: Pharmacy
+        }
+    }
+}): JSX.Element => {
     const { pharmacy } = route.params
 
     return (
@@ -93,7 +97,7 @@ const PharmacyDetails = ({ route }: Props): JSX.Element => {
             <FlatList
                 data={pharmacy.reviews}
                 horizontal
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => {
                     return (
                         <View style={styles.reviewCard}>
