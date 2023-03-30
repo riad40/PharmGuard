@@ -1,145 +1,129 @@
-import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native"
+import {
+    Text,
+    View,
+    StyleSheet,
+    Image,
+    FlatList,
+    ScrollView,
+} from "react-native"
 import { NavigationProp } from "@react-navigation/native"
 import appContainer from "../assets/styles/appContainer"
 import Iocicons from "react-native-vector-icons/Ionicons"
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import { useState } from "react"
-import { Pharmacy } from "../@types"
+import { MAIN_COLOR } from "../constants"
+import StarsRating from "../components/home/StarsRating"
+import getAverageRating from "../helpers/getAvreageRating"
 interface Props {
     route: any
     navigation: NavigationProp<any>
 }
 
-const PharmacyDetails = ({ route, navigation }: Props): JSX.Element => {
+const PharmacyDetails = ({ route }: Props): JSX.Element => {
     const { pharmacy } = route.params
 
-    const [isFavorite, setIsFavorite] = useState<boolean>(false)
-    const [favorites, setFavorites] = useState<Pharmacy[]>([])
-
-    const handlePress = async (pharmacy: Pharmacy) => {
-        await addToFavorites(pharmacy)
-    }
-
-    // add the pharmacy to the favorite list
-    const addToFavorites = async (pharmacy: Pharmacy) => {
-        try {
-            // get old data from the async storage
-            const jsonValue = await AsyncStorage.getItem("favorites")
-            const oldData = jsonValue != null ? JSON.parse(jsonValue) : []
-            // add the new pharmacy to the old data
-            const newData = [...oldData, pharmacy]
-            // save the new data to the async storage
-            await AsyncStorage.setItem("favorites", JSON.stringify(newData))
-            setFavorites(newData)
-            setIsFavorite(true)
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
     return (
-        <View style={appContainer.container}>
+        <ScrollView style={appContainer.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Iocicons
-                        name="chevron-back-outline"
-                        size={24}
-                        color="#000"
-                    />
-                </TouchableOpacity>
-                <Text style={styles.title}>Pharmacy Details</Text>
-                <TouchableOpacity onPress={() => handlePress(pharmacy)}>
-                    {
-                        // Check if the pharmacy is already in the favorite list
-                        isFavorite ? (
-                            <Iocicons name="heart" size={24} color="#000" />
-                        ) : (
-                            <Iocicons
-                                name="heart-outline"
-                                size={24}
-                                color="#000"
-                            />
-                        )
-                    }
-                </TouchableOpacity>
+                <Text style={styles.title}>{pharmacy.name}</Text>
             </View>
-            <View style={styles.container}>
+            <View style={styles.imgsContainer}>
                 <Image
-                    source={{ uri: pharmacy.images[0] }}
-                    style={styles.logo}
+                    source={{
+                        uri: pharmacy.images[0],
+                    }}
+                    style={styles.img}
                 />
-                <View style={styles.infoContainer}>
-                    <Text style={styles.name}>{pharmacy.name}</Text>
-                    <Text style={styles.address}>{pharmacy.address}</Text>
-                    <Text style={styles.distance}>{pharmacy.distance} km</Text>
+            </View>
+            <View style={[styles.center, { marginVertical: 10 }]}>
+                <StarsRating rating={getAverageRating(pharmacy.reviews)} />
+            </View>
+            <View
+                style={[
+                    styles.center,
+                    {
+                        flexDirection: "row",
+                        alignItems: "center",
+                        marginBottom: 10,
+                    },
+                ]}
+            >
+                <Iocicons name="location" size={30} color={MAIN_COLOR} />
+                <Text style={[styles.title, { marginLeft: 10 }]}>
+                    {pharmacy.address}
+                </Text>
+            </View>
+            <View
+                style={[
+                    styles.header,
+                    {
+                        flexDirection: "row",
+                        justifyContent: "space-around",
+                    },
+                ]}
+            >
+                <View style={styles.generalInfos}>
+                    <Text style={styles.title}>Opening Time</Text>
+                    <Text>{pharmacy.openingHours}</Text>
+                </View>
+                <View style={styles.generalInfos}>
+                    <Text style={styles.title}>Closing Time</Text>
+                    <Text>{pharmacy.closingHours}</Text>
                 </View>
             </View>
-            <View style={styles.container}>
-                <Text style={styles.heading}>Opening Hours</Text>
-                <Text style={styles.text}>{pharmacy.stratHours}</Text>
+
+            <Text style={styles.heading}>Contcat Infos</Text>
+            <View
+                style={[
+                    styles.header,
+                    {
+                        flexDirection: "row",
+                        justifyContent: "space-around",
+                    },
+                ]}
+            >
+                <View style={styles.generalInfos}>
+                    <Text style={styles.title}>Phone</Text>
+                    <Text>{pharmacy.phone}</Text>
+                </View>
+                <View style={styles.generalInfos}>
+                    <Text style={styles.title}>Email</Text>
+                    <Text>{pharmacy.email}</Text>
+                </View>
             </View>
-            <View style={styles.container}>
-                <Text style={styles.heading}>Closing Hours</Text>
-                <Text style={styles.text}>{pharmacy.endHours}</Text>
-            </View>
-            <View style={styles.container}>
-                <Text style={styles.heading}>Contact</Text>
-                <Text style={styles.text}>Phone: {pharmacy.phone}</Text>
-                <Text style={styles.text}>Email: {pharmacy.email}</Text>
-            </View>
-            <View style={styles.container}>
-                <Text style={styles.heading}>Services</Text>
-                <Text style={styles.text}>{pharmacy.services[0]}</Text>
-                <Text style={styles.text}>{pharmacy.services[1]}</Text>
-            </View>
-        </View>
+            <Text style={styles.heading}>Reviews</Text>
+            <FlatList
+                data={pharmacy.reviews}
+                horizontal
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => {
+                    return (
+                        <View style={styles.reviewCard}>
+                            <ScrollView
+                                contentContainerStyle={styles.center}
+                                nestedScrollEnabled={true}
+                            >
+                                <Iocicons
+                                    name="person"
+                                    size={30}
+                                    color={MAIN_COLOR}
+                                />
+                                <Text style={styles.title}>
+                                    {item.username}
+                                </Text>
+                                <StarsRating rating={item.rating} />
+                                <Text style={styles.paragraph}>
+                                    {item.comment}
+                                </Text>
+                            </ScrollView>
+                        </View>
+                    )
+                }}
+            />
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-        alignItems: "center",
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: "#ccc",
-        marginVertical: 5,
-    },
-    logo: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        marginRight: 10,
-    },
-    infoContainer: {
-        flex: 1,
-    },
-    name: {
-        fontSize: 16,
-        fontWeight: "bold",
-    },
-    address: {
-        fontSize: 14,
-        color: "#666",
-    },
-    distance: {
-        fontSize: 14,
-        color: "#666",
-    },
-    heading: {
-        fontSize: 16,
-        fontWeight: "bold",
-        marginRight: 10,
-    },
-    text: {
-        fontSize: 14,
-        color: "#666",
-        marginRight: 10,
-    },
     header: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
         padding: 10,
         backgroundColor: "#fff",
         borderRadius: 10,
@@ -148,6 +132,51 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold",
         color: "#000",
+        textAlign: "center",
+    },
+    imgsContainer: {
+        marginTop: 20,
+        width: "100%",
+        height: 200,
+        borderWidth: 2,
+        borderColor: MAIN_COLOR,
+        borderRadius: 10,
+    },
+    img: {
+        width: "100%",
+        height: "100%",
+        borderRadius: 9,
+    },
+    center: {
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    generalInfos: {
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    heading: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "#000",
+        textAlign: "center",
+        marginVertical: 10,
+    },
+    reviewCard: {
+        width: 200,
+        height: 150,
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        marginHorizontal: 10,
+        padding: 10,
+        alignItems: "center",
+    },
+    paragraph: {
+        fontSize: 16,
+        color: "#000",
+        textAlign: "center",
     },
 })
 
