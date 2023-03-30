@@ -40,7 +40,7 @@ export type Pharmacy = {
 export type Review = {
     id: number
     pharmacyId: number
-    userId: number
+    username: string
     rating: number
     comment: string
     date: string
